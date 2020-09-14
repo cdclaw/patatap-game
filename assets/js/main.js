@@ -41,15 +41,19 @@ function onKeyDown(event) {
   var sound = new Howl({
     src: [soundSrc],
   });
-  // generate a random point on canvas when a key is pressed
-  var maxPoint = new Point(view.size.width, view.size.height);
-  var randomPoint = Point.random();
-  var point = maxPoint * randomPoint;
-  var newCircle = new Path.Circle(point, 500);
-  newCircle.fillColor = color;
-  circles.push(newCircle);
   // play sound
   sound.play();
+  generateRandomCircle(color);
+}
+function onMouseDown(event) {
+  var color = randomProperty(keyData).color;
+  var soundSrc = "assets/sounds/" + randomProperty(keyData).sound + ".mp3";
+  var sound = new Howl({
+    src: [soundSrc],
+  });
+  // play sound
+  sound.play();
+  generateRandomCircle(color);
 }
 
 function onFrame(event) {
@@ -62,4 +66,19 @@ function onFrame(event) {
       circles.splice(i, 1); // remove the circle from the array
     }
   }
+}
+
+function generateRandomCircle(color) {
+  // generate a random point on canvas
+  var maxPoint = new Point(view.size.width, view.size.height);
+  var randomPoint = Point.random();
+  var point = maxPoint * randomPoint;
+  var newCircle = new Path.Circle(point, 500);
+  newCircle.fillColor = color;
+  circles.push(newCircle);
+}
+
+function randomProperty(obj) {
+  var keys = Object.keys(obj);
+  return obj[keys[(keys.length * Math.random()) << 0]];
 }
