@@ -53,7 +53,7 @@ function onMouseDown(event) {
   });
   // play sound
   sound.play();
-  generateRandomCircle(color);
+  generaleCircle(event.point, color);
 }
 
 function onFrame(event) {
@@ -73,6 +73,12 @@ function generateRandomCircle(color) {
   var maxPoint = new Point(view.size.width, view.size.height);
   var randomPoint = Point.random();
   var point = maxPoint * randomPoint;
+  var newCircle = new Path.Circle(point, 500);
+  newCircle.fillColor = color;
+  circles.push(newCircle);
+}
+
+function generaleCircle(point, color) {
   var newCircle = new Path.Circle(point, 500);
   newCircle.fillColor = color;
   circles.push(newCircle);
