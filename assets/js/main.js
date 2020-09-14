@@ -31,16 +31,14 @@ var keyData = {
   space: { color: "#F9D368", sound: "corona" },
   tab: { color: "#50FA7B", sound: "clay" },
 };
-var sound;
 
 function onKeyDown(event) {
-  // sound ? sound.stop() : null;
   // get key color and sound using keyData object
   var color = keyData[event.key] ? keyData[event.key].color : "#50FA7B";
   var soundSrc = keyData[event.key]
     ? "assets/sounds/" + keyData[event.key].sound + ".mp3"
     : "assets/sounds/bubbles.mp3";
-  sound = new Howl({
+  var sound = new Howl({
     src: [soundSrc],
   });
   // generate a random point on canvas when a key is pressed
